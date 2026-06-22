@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const elements = {
     quote: document.getElementById("quote"),
@@ -6,19 +6,29 @@ const elements = {
 };
 
 async function getRandomImage() {
-    const client_id = "YOUR_ACCESS_KEY";
-    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
     try {
-        const response = await fetch(endpoint);
+        const response = await fetch("/api/v1/getRandomImage");
         const returnedData = await response.json();
-        const receivedPhotoUrl = returnedData.urls.regular;
+
+        console.log(returnedData);
 
         const imgDiv = document.querySelector(".background-img");
-        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
+        console.log(imgDiv);
+
+        if (!imgDiv) {
+            console.error("background-img not found");
+            return;
+        }
+
+        imgDiv.style.backgroundImage = `url("${returnedData.data}")`;
     } catch (error) {
         console.error(error);
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    getRandomImage();
+});
 
 
 getRandomImage();
