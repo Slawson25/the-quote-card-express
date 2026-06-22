@@ -15,7 +15,7 @@ body {
 }
 
 .background-img {
-    background-image: url("/img/code_u.jpeg");
+    background-image: url("./img/code_u.jpeg");
     background-size: cover;
     position: fixed;
     top: 0;
